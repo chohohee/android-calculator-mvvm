@@ -33,7 +33,7 @@ class CalculatorViewModel(
 
     init {
         viewModelScope.launch {
-            _calculationMemories.postValue(calculatorRepository.getCalculationMemoryAll())
+            _calculationMemories.value = calculatorRepository.getCalculationMemoryAll()
         }
     }
 
@@ -63,7 +63,7 @@ class CalculatorViewModel(
         val newMemories = CalculationMemory(expression.toString(), result.toString())
         viewModelScope.launch {
             calculatorRepository.insertCalculationMemory(newMemories)
-            _calculationMemories.postValue(calculatorRepository.getCalculationMemoryAll())
+            _calculationMemories.value = calculatorRepository.getCalculationMemoryAll()
         }
 
         _expression.value = Expression(listOf(result))
