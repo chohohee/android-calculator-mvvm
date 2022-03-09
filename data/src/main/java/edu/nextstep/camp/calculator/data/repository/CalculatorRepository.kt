@@ -4,7 +4,7 @@ import edu.nextstep.camp.calculator.data.CalculationMemory
 
 interface CalculatorRepository {
 
-    fun getCalculationMemoryAll(): List<CalculationMemory>
+    suspend fun getCalculationMemoryAll(): List<CalculationMemory>
 
-    fun insertCalculationMemory(calculationMemory: CalculationMemory)
+    suspend fun insertCalculationMemory(calculationMemory: CalculationMemory)
 }

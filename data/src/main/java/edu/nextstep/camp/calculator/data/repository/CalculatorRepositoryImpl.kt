@@ -4,16 +4,22 @@ import android.content.Context
 import edu.nextstep.camp.calculator.data.CalculationMemory
 import edu.nextstep.camp.calculator.data.CalculatorDao
 import edu.nextstep.camp.calculator.data.CalculatorDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 internal class CalculatorRepositoryImpl(
     private val calculatorDao: CalculatorDao
 ) : CalculatorRepository {
-    override fun getCalculationMemoryAll(): List<CalculationMemory> {
-        return calculatorDao.getCalculationMemoryAll()
+    override suspend fun getCalculationMemoryAll(): List<CalculationMemory> {
+        return withContext(Dispatchers.IO) {
+            calculatorDao.getCalculationMemoryAll()
+        }
     }
 
-    override fun insertCalculationMemory(calculationMemory: CalculationMemory) {
-        calculatorDao.insertCalculationMemory(calculationMemory)
+    override suspend fun insertCalculationMemory(calculationMemory: CalculationMemory) {
+        withContext(Dispatchers.IO) {
+            calculatorDao.insertCalculationMemory(calculationMemory)
+        }
     }
 }
 
